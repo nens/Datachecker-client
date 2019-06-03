@@ -25,47 +25,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('component did mount tom');
-    // const url = "https://datachecker.staging.lizard.net/api/upload/";
+    
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify({})
     };
     fetch(url, opts)
       .then(responseParsed => {
         return responseParsed.json();
       })
       .then(parsedBody => {
-        console.log("parsedBody", parsedBody);
         if (parsedBody.detail === "Authentication credentials were not provided.") {
           console.log("Authentication credentials were not provided.");
           const nextUrl = window.location.href;
-          console.log('nextUrl', nextUrl);
-          // window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+          // next line needs be active on prod, but commented out on dev
+          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
         } else {
           console.log("You appear to be logged in");
         }
 
-        const url = "/api/upload/"
-        const opts = {
-          credentials: "same-origin",
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-          },
-          body: JSON.stringify({})
-        };
-        fetch(url, opts)
-        .then(responseParsed => {
-          return responseParsed.json();
-        })
-        .then(parsedBody => {
-          console.log(parsedBody)
-        })
+        
 
 
       });
@@ -88,41 +69,26 @@ class App extends Component {
     console.log('Name: ' + this.state.name);
     console.log('Email: ' + this.state.email);
 
-    // authenticate with bootstrap
-    // Below is the redux variant
-    // adapted from lizard-management-client /src/actions.js
-    // dispatch(requestLizardBootstrap());
-    // fetch("https://demo.lizard.net/bootstrap/lizard/", {
-    //   credentials: "same-origin"
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data && data.user && data.user.authenticated === true) {
-    //       dispatch(receiveLizardBootstrap(data));
-    //     } else {
-    //       const nextUrl = window.location.href;
-    //       window.location.href = `${data.sso.login}&next=${nextUrl}`;
-    //     }
-    //   });
-
-    // post
-    const url = "https://datachecker.staging.lizard.net/api/upload/";
+    var fileInput = document.getElementsByName('suf-hyd-file')[0];
+    console.log('fileInput', fileInput, fileInput.files, fileInput.files[0]);
+    var form = new FormData();
+    form.append("file", fileInput.files[0]);
+    const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({})
+      headers: { 
+        'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+      },
+      body: form
     };
     fetch(url, opts)
-      .then(responseParsed => {
-        return responseParsed.json();
-      })
-      .then(parsedBody => {
-        console.log("parsedBody", parsedBody);
-      });
-
-    // next line should be removed when pushing to master
-    // it is to make sure that the page does not refresh for development
+    .then(responseParsed => {
+      return responseParsed.json();
+    })
+    .then(parsedBody => {
+      console.log(parsedBody)
+    })
     event.preventDefault();
   }
 
