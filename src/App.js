@@ -294,52 +294,52 @@ class App extends Component {
             <div>
               3 Upload bestanden voor GWSW Hydx
               <br />
-              <input type="file" name="gwsw-hydx-file" multiple onChange={this.handleChangeFileDeliveryFormatGWSW} />
+              <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
               <br />
               <br />
               Upload bestanden voor Suf-Hyd
               <br />
-              <input type="file" name="suf-hyd-file" multiple onChange={this.handleChangeFileDeliveryFormatSuf} />
+              <input type="file" name="suf-hyd-file" onChange={this.handleChangeFileDeliveryFormatSuf} />
               <br />
               <br />
               Upload bestanden voor GBI
               <br />
-              <input type="file" name="gbi-file" multiple onChange={this.handleChangeFileDeliveryFormatGBI} />
+              <input type="file" name="gbi-file" onChange={this.handleChangeFileDeliveryFormatGBI} />
               <br />
               <br />
               Upload bestanden voor een ander aanleverformaat
               <br />
-              <input type="file" name="ander-file" multiple onChange={this.handleChangeFileDeliveryFormatOther} />
+              <input type="file" name="ander-file" onChange={this.handleChangeFileDeliveryFormatOther} />
               <br />
               <br />
               Upload bestanden voor Verhard oppervlak
               <br />
-              <input type="file" name="verhard-oppervlak-file" multiple onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
+              <input type="file" name="verhard-oppervlak-file" onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
               <br />
               <br />
               Upload bestanden voor Verhard oppervlak - BGT inloopmodel
               <br />
-              <input type="file" name="verhard-oppervlak-bgt-file" multiple onChange={this.handleChangeFileHardenedSurfaceBGT} />
+              <input type="file" name="verhard-oppervlak-bgt-file" onChange={this.handleChangeFileHardenedSurfaceBGT} />
               <br />
               <br />
               Upload bestanden voor Verhard oppervlak - Anders
               <br />
-              <input type="file" name="verhard-oppervlak-anders-file" multiple onChange={this.handleChangeFileHardenedSurfaceOther} />
+              <input type="file" name="verhard-oppervlak-anders-file" onChange={this.handleChangeFileHardenedSurfaceOther} />
               <br />
               <br />
               Upload bestanden voor Drinkwater gebruik
               <br />
-              <input type="file" name="drinkwater-gebruik-file" multiple onChange={this.handleChangeFileAdditionalDataDrinkingWaterUsage} />
+              <input type="file" name="drinkwater-gebruik-file" onChange={this.handleChangeFileAdditionalDataDrinkingWaterUsage} />
               <br />
               <br />
               Upload bestanden voor Bemalings Gebieden
               <br />
-              <input type="file" name="bemalings-gebieden-file" multiple onChange={this.handleChangeFileAdditionalDataDrainageAreas} />
+              <input type="file" name="bemalings-gebieden-file" onChange={this.handleChangeFileAdditionalDataDrainageAreas} />
               <br />
               <br />
               Upload bestanden voor Andere data
               <br />
-              <input type="file" name="andere-data-file" multiple onChange={this.handleChangeFileAdditionalDataOtherData} />
+              <input type="file" name="andere-data-file" onChange={this.handleChangeFileAdditionalDataOtherData} />
               <br />
               <br />
               <button>VOLGENDE</button>
