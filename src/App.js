@@ -9,22 +9,28 @@ class App extends Component {
       // Step 1
       modelTypeRiolering: false,
       modelTypeOppervlakteWater: false,
-      // modelType: {
-      //   riolering: false
-      // }
       // Step 2
       deliveryFormatGWSW: false,
       deliveryFormatSuf: false,
       deliveryFormatGBI: false,
       deliveryFormatOther: false,
       additionalDataHardenedSurface: false,
-      additionalDataHardenedDrinkingWaterUsage: false,
+      additionalDataDrinkingWaterUsage: false,
       additionalDataDrainageAreas: false,
       additionalDataOtherData: false,
       hardenedSurfaceBGT: false,
       hardenedSurfaceOther: false,
       // Step 3
-      fileGWSW: "",
+      fileDeliveryFormatGWSW: [],
+      fileDeliveryFormatSuf: [],
+      fileDeliveryFormatGBI: [],
+      fileDeliveryFormatOther: [],
+      fileAdditionalDataHardenedSurface: [],
+      fileAdditionalDataDrinkingWaterUsage: [],
+      fileAdditionalDataDrainageAreas: [],
+      fileAdditionalDataOtherData: [],
+      fileHardenedSurfaceBGT: [],
+      fileHardenedSurfaceOther: [],
       // Step 4
       name: "",
       email: "",
@@ -47,7 +53,16 @@ class App extends Component {
     this.handleChangeHardenedSurfaceBGT = this.handleChangeHardenedSurfaceBGT.bind(this);
     this.handleChangeHardenedSurfaceOther = this.handleChangeHardenedSurfaceOther.bind(this);
     // Step 3
-    this.handleChangeFileGWSW = this.handleChangeFileGWSW.bind(this);
+    this.handleChangeFileDeliveryFormatGWSW = this.handleChangeFileDeliveryFormatGWSW.bind(this);
+    this.handleChangeFileDeliveryFormatSuf = this.handleChangeFileDeliveryFormatSuf.bind(this);
+    this.handleChangeFileDeliveryFormatGBI = this.handleChangeFileDeliveryFormatGBI.bind(this);
+    this.handleChangeFileDeliveryFormatOther = this.handleChangeFileDeliveryFormatOther.bind(this);
+    this.handleChangeFileAdditionalDataHardenedSurface = this.handleChangeFileAdditionalDataHardenedSurface.bind(this);
+    this.handleChangeFileAdditionalDataDrinkingWaterUsage = this.handleChangeFileAdditionalDataDrinkingWaterUsage.bind(this);
+    this.handleChangeFileAdditionalDataDrainageAreas = this.handleChangeFileAdditionalDataDrainageAreas.bind(this);
+    this.handleChangeFileAdditionalDataOtherData = this.handleChangeFileAdditionalDataOtherData.bind(this);
+    this.handleChangeFileHardenedSurfaceBGT = this.handleChangeFileHardenedSurfaceBGT.bind(this);
+    this.handleChangeFileHardenedSurfaceOther = this.handleChangeFileHardenedSurfaceOther.bind(this);
     // Step 4
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -94,13 +109,39 @@ class App extends Component {
     this.setState({hardenedSurfaceBGT: !this.state.hardenedSurfaceBGT});
   }
   handleChangeHardenedSurfaceOther(event) {
-    this.setState({hardenedSurfaceOther: !this.statethis.state});
+    this.setState({hardenedSurfaceOther: !this.state.hardenedSurfaceOther});
   }
 
   // Step 3
-  handleChangeFileGWSW(event) {
-    console.log(event.target);
-    this.setState({fileGWSW: event.target.files});
+  handleChangeFileDeliveryFormatGWSW(event) {
+    this.setState({fileDeliveryFormatGWSW: event.target.files});
+  }
+  handleChangeFileDeliveryFormatSuf(event) {
+    this.setState({fileDeliveryFormatSuf: event.target.files});
+  }
+  handleChangeFileDeliveryFormatGBI(event) {
+    this.setState({fileDeliveryFormatGBI: event.target.files});
+  }
+  handleChangeFileDeliveryFormatOther(event) {
+    this.setState({fileDeliveryFormatOther: event.target.files});
+  }
+  handleChangeFileAdditionalDataHardenedSurface(event) {
+    this.setState({fileAdditionalDataHardenedSurface: event.target.files});
+  }
+  handleChangeFileAdditionalDataDrinkingWaterUsage(event) {
+    this.setState({fileAdditionalDataDrinkingWaterUsage: event.target.files});
+  }
+  handleChangeFileAdditionalDataDrainageAreas(event) {
+    this.setState({fileAdditionalDataDrainageAreas: event.target.files});
+  }
+  handleChangeFileAdditionalDataOtherData(event) {
+    this.setState({fileAdditionalDataOtherData: event.target.files});
+  }
+  handleChangeFileHardenedSurfaceBGT(event) {
+    this.setState({fileHardenedSurfaceBGT: event.target.files});
+  }
+  handleChangeFileHardenedSurfaceOther(event) {
+    this.setState({fileHardenedSurfaceOther: event.target.files});
   }
 
   // Step 4
@@ -113,16 +154,11 @@ class App extends Component {
 
   // Step 5
   handleChangeFolderName(event) {
-    // console.log(event.target.value);
-    // console.log(this);
     this.setState({folderName: event.target.value}); // gives error that this is undefined..
   }
 
   // Submit
   handleSubmit(event) {
-    // console.log('modelTypeRiolering: ' + this.state.modelTypeRiolering);
-    // console.log('Name: ' + this.state.name);
-    // console.log('Email: ' + this.state.email);
     console.log(this.state);
 
     // authenticate with bootstrap
@@ -258,32 +294,52 @@ class App extends Component {
             <div>
               3 Upload bestanden voor GWSW Hydx
               <br />
-              <input type="file" name="gwsw-hydx-file" multiple onChange={this.handleChangeFileGWSW} />
+              <input type="file" name="gwsw-hydx-file" multiple onChange={this.handleChangeFileDeliveryFormatGWSW} />
               <br />
               <br />
               Upload bestanden voor Suf-Hyd
               <br />
-              <input type="file" name="suf-hyd-file" multiple />
+              <input type="file" name="suf-hyd-file" multiple onChange={this.handleChangeFileDeliveryFormatSuf} />
+              <br />
+              <br />
+              Upload bestanden voor GBI
+              <br />
+              <input type="file" name="gbi-file" multiple onChange={this.handleChangeFileDeliveryFormatGBI} />
               <br />
               <br />
               Upload bestanden voor een ander aanleverformaat
               <br />
-              <input type="file" name="ander-file" multiple />
+              <input type="file" name="ander-file" multiple onChange={this.handleChangeFileDeliveryFormatOther} />
+              <br />
+              <br />
+              Upload bestanden voor Verhard oppervlak
+              <br />
+              <input type="file" name="verhard-oppervlak-file" multiple onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
               <br />
               <br />
               Upload bestanden voor Verhard oppervlak - BGT inloopmodel
               <br />
-              <input type="file" name="verhard-opplervlak-bgt-inloopmodel" multiple />
+              <input type="file" name="verhard-oppervlak-bgt-file" multiple onChange={this.handleChangeFileHardenedSurfaceBGT} />
+              <br />
+              <br />
+              Upload bestanden voor Verhard oppervlak - Anders
+              <br />
+              <input type="file" name="verhard-oppervlak-anders-file" multiple onChange={this.handleChangeFileHardenedSurfaceOther} />
               <br />
               <br />
               Upload bestanden voor Drinkwater gebruik
               <br />
-              <input type="file" name="drinkwater-gebruik-file" multiple />
+              <input type="file" name="drinkwater-gebruik-file" multiple onChange={this.handleChangeFileAdditionalDataDrinkingWaterUsage} />
+              <br />
+              <br />
+              Upload bestanden voor Bemalings Gebieden
+              <br />
+              <input type="file" name="bemalings-gebieden-file" multiple onChange={this.handleChangeFileAdditionalDataDrainageAreas} />
               <br />
               <br />
               Upload bestanden voor Andere data
               <br />
-              <input type="file" name="andere-data-file" multiple />
+              <input type="file" name="andere-data-file" multiple onChange={this.handleChangeFileAdditionalDataOtherData} />
               <br />
               <br />
               <button>VOLGENDE</button>
