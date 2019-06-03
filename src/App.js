@@ -205,10 +205,16 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <div className="App-header-top">
+            Datachecker
+          </div>
+          <div className="App-header-bottom"></div>
         </header>
         <main className="App-main">
           <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
+              <br />
+              <br />
               1 Wat voor model wilt u checken?
               <br />
               <input type="radio" name="model-type-riolering" value="riolering" checked={this.state.modelTypeRiolering} onChange={this.handleChangeModelTypeRiolering} />
@@ -216,8 +222,6 @@ class App extends Component {
               <br />
               <input type="radio" name="model-type-oppervlakte-water" value="oppervlakte-water" checked={this.state.modelTypeOppervlakteWater} onChange={this.handleChangeModelTypeOppervlakteWater} disabled/>
               Oppervlakte water
-              <br />
-              <button>VOLGENDE</button>
               <br />
               <br />
             </div>
@@ -287,8 +291,6 @@ class App extends Component {
                   </tr>
                 </tbody>
               </table>
-              <button>VOLGENDE</button>
-              <br />
               <br />
             </div>
             <div>
@@ -342,9 +344,6 @@ class App extends Component {
               <input type="file" name="andere-data-file" onChange={this.handleChangeFileAdditionalDataOtherData} />
               <br />
               <br />
-              <button>VOLGENDE</button>
-              <br />
-              <br />
             </div>
             <div>
               4 Naam en email-adres
@@ -353,8 +352,6 @@ class App extends Component {
               <br />
               <input type="text" name="email" value={this.state.email} onChange={this.handleChangeEmail} placeholder="Email" />
               <br />
-              <button>VOLGENDE</button>
-              <br />
               <br />
             </div>
             <div>
@@ -362,13 +359,14 @@ class App extends Component {
               <br />
               <input type="text" name="folderName" value={this.state.folderName} onChange={this.handleChangeFolderName} placeholder="Folder" />
               <br />
-              <button>VOLGENDE</button>
-              <br />
               <br />
             </div>
             <div>
               U bent nu klaar. Controleer nog een keer uw aangeleverde data of verzend direct.
+              <br />
               <input type="submit" value="VERZENDEN" />
+              <br />
+              <br />
             </div>
           </form>
         </main>

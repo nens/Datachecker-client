@@ -2,12 +2,28 @@
 }
 
 .App-header {
-  height: 15vh;
-  background-color: darkred;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+}
+.App-header-top {
+  display: flex;
+  height: 7.5vh;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #C0392B;
+}
+.App-header-bottom {
+  display: flex;
+  height: 7.5vh;
+  flex: 1 0 100%;
+  background-color: #FF7070;
 }
 
 .App-main {
   height: 75vh;
+  padding-left: 10px;
   overflow-y: auto;
 }
 
@@ -17,5 +33,5 @@ input[type="radio"]:disabled {
 
 .App-footer {
   height: 10vh;
-  background-color: grey;
+  background-color: #c3c3c3;
 }
