@@ -59,48 +59,48 @@ class App extends Component {
 
   // Step 1
   handleChangeModelTypeRiolering(event) {
-    this.setState({modelTypeRiolering: !event.target.modelTypeRiolering});
+    this.setState({modelTypeRiolering: !this.state.modelTypeRiolering});
   }
   handleChangeModelTypeOppervlakteWater(event) {
-    this.setState({modelTypeOppervlakteWater: !event.target.modelTypeOppervlakteWater});
+    this.setState({modelTypeOppervlakteWater: !this.state.modelTypeOppervlakteWater});
   }
 
   // Step 2
   handleChangeDeliveryFormatGWSW(event) {
-    this.setState({deliveryFormatGWSW: !event.target.deliveryFormatGWSW});
+    this.setState({deliveryFormatGWSW: !this.state.deliveryFormatGWSW});
   }
   handleChangeDeliveryFormatSuf(event) {
-    this.setState({deliveryFormatSuf: !event.target.deliveryFormatSuf});
+    this.setState({deliveryFormatSuf: !this.state.deliveryFormatSuf});
   }
   handleChangeDeliveryFormatGBI(event) {
-    this.setState({deliveryFormatGBI: !event.target.deliveryFormatGBI});
+    this.setState({deliveryFormatGBI: !this.state.deliveryFormatGBI});
   }
   handleChangedeliveryFormatOther(event) {
-    this.setState({deliveryFormatOther: !event.target.deliveryFormatOther});
+    this.setState({deliveryFormatOther: !this.state.deliveryFormatOther});
   }
   handleChangeAdditionalDataHardenedSurface(event) {
-    this.setState({additionalDataHardenedSurface: !event.target.additionalDataHardenedSurface});
+    this.setState({additionalDataHardenedSurface: !this.state.additionalDataHardenedSurface});
   }
   handleChangeAdditionalDataDrinkingWaterUsage(event) {
-    this.setState({additionalDataDrinkingWaterUsage: !event.target.additionalDataDrinkingWaterUsage});
+    this.setState({additionalDataDrinkingWaterUsage: !this.state.additionalDataDrinkingWaterUsage});
   }
   handleChangeAdditionalDataDrainageAreas(event) {
-    this.setState({additionalDataDrainageAreas: !event.target.additionalDataDrainageAreas});
+    this.setState({additionalDataDrainageAreas: !this.state.additionalDataDrainageAreas});
   }
   handleChangeAdditionalDataOtherData(event) {
-    this.setState({additionalDataOtherData: !event.target.additionalDataOtherData});
+    this.setState({additionalDataOtherData: !this.state.additionalDataOtherData});
   }
   handleChangeHardenedSurfaceBGT(event) {
-    this.setState({hardenedSurfaceBGT: !event.target.hardenedSurfaceBGT});
+    this.setState({hardenedSurfaceBGT: !this.state.hardenedSurfaceBGT});
   }
   handleChangeHardenedSurfaceOther(event) {
-    this.setState({hardenedSurfaceOther: !event.target.hardenedSurfaceOther});
+    this.setState({hardenedSurfaceOther: !this.statethis.state});
   }
 
   // Step 3
   handleChangeFileGWSW(event) {
     console.log(event.target);
-    this.setState({fileGWSW: event.target.value});
+    this.setState({fileGWSW: event.target.files});
   }
 
   // Step 4
@@ -142,6 +142,8 @@ class App extends Component {
     //     }
     //   });
 
+    // Create the metadata file
+
     // post
     const url = "https://datachecker.staging.lizard.net/api/upload/";
     const opts = {
@@ -169,7 +171,7 @@ class App extends Component {
         <header className="App-header">
         </header>
         <main className="App-main">
-          <form onSubmit={this.handleSubmit}>
+          <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
               1 Wat voor model wilt u checken?
               <br />
