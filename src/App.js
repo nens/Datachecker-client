@@ -21,10 +21,10 @@ class App extends Component {
       additionalDataHardenedDrinkingWaterUsage: false,
       additionalDataDrainageAreas: false,
       additionalDataOtherData: false,
-      additionalDataOtherData: false,
       hardenedSurfaceBGT: false,
       hardenedSurfaceOther: false,
       // Step 3
+      fileGWSW: "",
       // Step 4
       name: "",
       email: "",
@@ -46,6 +46,8 @@ class App extends Component {
     this.handleChangeAdditionalDataOtherData = this.handleChangeAdditionalDataOtherData.bind(this);
     this.handleChangeHardenedSurfaceBGT = this.handleChangeHardenedSurfaceBGT.bind(this);
     this.handleChangeHardenedSurfaceOther = this.handleChangeHardenedSurfaceOther.bind(this);
+    // Step 3
+    this.handleChangeFileGWSW = this.handleChangeFileGWSW.bind(this);
     // Step 4
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -96,6 +98,10 @@ class App extends Component {
   }
 
   // Step 3
+  handleChangeFileGWSW(event) {
+    console.log(event.target);
+    this.setState({fileGWSW: event.target.value});
+  }
 
   // Step 4
   handleChangeName(event) {
@@ -250,32 +256,32 @@ class App extends Component {
             <div>
               3 Upload bestanden voor GWSW Hydx
               <br />
-              <input type="file" name="gwsw-hydx-file" />
+              <input type="file" name="gwsw-hydx-file" multiple onChange={this.handleChangeFileGWSW} />
               <br />
               <br />
               Upload bestanden voor Suf-Hyd
               <br />
-              <input type="file" name="suf-hyd-file" />
+              <input type="file" name="suf-hyd-file" multiple />
               <br />
               <br />
               Upload bestanden voor een ander aanleverformaat
               <br />
-              <input type="file" name="ander-file" />
+              <input type="file" name="ander-file" multiple />
               <br />
               <br />
               Upload bestanden voor Verhard oppervlak - BGT inloopmodel
               <br />
-              <input type="file" name="verhard-opplervlak-bgt-inloopmodel" />
+              <input type="file" name="verhard-opplervlak-bgt-inloopmodel" multiple />
               <br />
               <br />
               Upload bestanden voor Drinkwater gebruik
               <br />
-              <input type="file" name="drinkwater-gebruik-file" />
+              <input type="file" name="drinkwater-gebruik-file" multiple />
               <br />
               <br />
               Upload bestanden voor Andere data
               <br />
-              <input type="file" name="andere-data-file" />
+              <input type="file" name="andere-data-file" multiple />
               <br />
               <br />
               <button>VOLGENDE</button>
