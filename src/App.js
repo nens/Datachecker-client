@@ -38,6 +38,23 @@ class App extends Component {
     console.log('Name: ' + this.state.name);
     console.log('Email: ' + this.state.email);
 
+    // authenticate with bootstrap
+    // Below is the redux variant
+    // adapted from lizard-management-client /src/actions.js
+    // dispatch(requestLizardBootstrap());
+    // fetch("https://demo.lizard.net/bootstrap/lizard/", {
+    //   credentials: "same-origin"
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data && data.user && data.user.authenticated === true) {
+    //       dispatch(receiveLizardBootstrap(data));
+    //     } else {
+    //       const nextUrl = window.location.href;
+    //       window.location.href = `${data.sso.login}&next=${nextUrl}`;
+    //     }
+    //   });
+
     // post
     const url = "https://datachecker.staging.lizard.net/api/upload/";
     const opts = {
