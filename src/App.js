@@ -37,6 +37,25 @@ class App extends Component {
     console.log('modelTypeRiolering: ' + this.state.modelTypeRiolering);
     console.log('Name: ' + this.state.name);
     console.log('Email: ' + this.state.email);
+
+    // post
+    const url = "https://datachecker.staging.lizard.net/api/upload/";
+    const opts = {
+      credentials: "same-origin",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({})
+    };
+    fetch(url, opts)
+      .then(responseParsed => {
+        return responseParsed.json();
+      })
+      .then(parsedBody => {
+        console.log("parsedBody", parsedBody);
+      });
+
+    // next line should be removed when pushing to master
+    // it is to make sure that the page does not refresh for development
     event.preventDefault();
   }
 
