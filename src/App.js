@@ -6,37 +6,118 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      name: "",
-      email: "",
+      // Step 1
+      modelTypeRiolering: false,
+      modelTypeOppervlakteWater: false,
       // modelType: {
       //   riolering: false
       // }
-      modelTypeRiolering: false
+      // Step 2
+      deliveryFormatGWSW: false,
+      deliveryFormatSuf: false,
+      deliveryFormatGBI: false,
+      deliveryFormatOther: false,
+      additionalDataHardenedSurface: false,
+      additionalDataHardenedDrinkingWaterUsage: false,
+      additionalDataDrainageAreas: false,
+      additionalDataOtherData: false,
+      additionalDataOtherData: false,
+      hardenedSurfaceBGT: false,
+      hardenedSurfaceOther: false,
+      // Step 3
+      // Step 4
+      name: "",
+      email: "",
+      // Step 5
+      folderName: "",
     };
 
+    // Step 1
     this.handleChangeModelTypeRiolering = this.handleChangeModelTypeRiolering.bind(this);
-    this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeModelTypeOppervlakteWater = this.handleChangeModelTypeOppervlakteWater.bind(this);
+    // Step 2
+    this.handleChangeDeliveryFormatGWSW = this.handleChangeDeliveryFormatGWSW.bind(this);
+    this.handleChangeDeliveryFormatSuf = this.handleChangeDeliveryFormatSuf.bind(this);
+    this.handleChangeDeliveryFormatGBI = this.handleChangeDeliveryFormatGBI.bind(this);
+    this.handleChangedeliveryFormatOther = this.handleChangedeliveryFormatOther.bind(this);
+    this.handleChangeAdditionalDataHardenedSurface = this.handleChangeAdditionalDataHardenedSurface.bind(this);
+    this.handleChangeAdditionalDataDrinkingWaterUsage = this.handleChangeAdditionalDataDrinkingWaterUsage.bind(this);
+    this.handleChangeAdditionalDataDrainageAreas = this.handleChangeAdditionalDataDrainageAreas.bind(this);
+    this.handleChangeAdditionalDataOtherData = this.handleChangeAdditionalDataOtherData.bind(this);
+    this.handleChangeHardenedSurfaceBGT = this.handleChangeHardenedSurfaceBGT.bind(this);
+    this.handleChangeHardenedSurfaceOther = this.handleChangeHardenedSurfaceOther.bind(this);
+    // Step 4
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    // Step 5
+    this.handleChangeFolderName = this.handleChangeFolderName.bind(this);
+    // Submit
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Step 1
   handleChangeModelTypeRiolering(event) {
     this.setState({modelTypeRiolering: !event.target.modelTypeRiolering});
   }
+  handleChangeModelTypeOppervlakteWater(event) {
+    this.setState({modelTypeOppervlakteWater: !event.target.modelTypeOppervlakteWater});
+  }
 
+  // Step 2
+  handleChangeDeliveryFormatGWSW(event) {
+    this.setState({deliveryFormatGWSW: !event.target.deliveryFormatGWSW});
+  }
+  handleChangeDeliveryFormatSuf(event) {
+    this.setState({deliveryFormatSuf: !event.target.deliveryFormatSuf});
+  }
+  handleChangeDeliveryFormatGBI(event) {
+    this.setState({deliveryFormatGBI: !event.target.deliveryFormatGBI});
+  }
+  handleChangedeliveryFormatOther(event) {
+    this.setState({deliveryFormatOther: !event.target.deliveryFormatOther});
+  }
+  handleChangeAdditionalDataHardenedSurface(event) {
+    this.setState({additionalDataHardenedSurface: !event.target.additionalDataHardenedSurface});
+  }
+  handleChangeAdditionalDataDrinkingWaterUsage(event) {
+    this.setState({additionalDataDrinkingWaterUsage: !event.target.additionalDataDrinkingWaterUsage});
+  }
+  handleChangeAdditionalDataDrainageAreas(event) {
+    this.setState({additionalDataDrainageAreas: !event.target.additionalDataDrainageAreas});
+  }
+  handleChangeAdditionalDataOtherData(event) {
+    this.setState({additionalDataOtherData: !event.target.additionalDataOtherData});
+  }
+  handleChangeHardenedSurfaceBGT(event) {
+    this.setState({hardenedSurfaceBGT: !event.target.hardenedSurfaceBGT});
+  }
+  handleChangeHardenedSurfaceOther(event) {
+    this.setState({hardenedSurfaceOther: !event.target.hardenedSurfaceOther});
+  }
+
+  // Step 3
+
+  // Step 4
   handleChangeName(event) {
     this.setState({name: event.target.value});
   }
-
   handleChangeEmail(event) {
     this.setState({email: event.target.value});
   }
 
+  // Step 5
+  handleChangeFolderName(event) {
+    // console.log(event.target.value);
+    // console.log(this);
+    this.setState({folderName: event.target.value}); // gives error that this is undefined..
+  }
+
+  // Submit
   handleSubmit(event) {
-    console.log('modelTypeRiolering: ' + this.state.modelTypeRiolering);
-    console.log('Name: ' + this.state.name);
-    console.log('Email: ' + this.state.email);
+    // console.log('modelTypeRiolering: ' + this.state.modelTypeRiolering);
+    // console.log('Name: ' + this.state.name);
+    // console.log('Email: ' + this.state.email);
+    console.log(this.state);
 
     // authenticate with bootstrap
     // Below is the redux variant
@@ -89,7 +170,7 @@ class App extends Component {
               <input type="radio" name="model-type-riolering" value="riolering" checked={this.state.modelTypeRiolering} onChange={this.handleChangeModelTypeRiolering} />
               Riolering
               <br />
-              <input type="radio" name="model-type-oppervlakte-water" value="oppervlakte-water" disabled/>
+              <input type="radio" name="model-type-oppervlakte-water" value="oppervlakte-water" checked={this.state.modelTypeOppervlakteWater} onChange={this.handleChangeModelTypeOppervlakteWater} disabled/>
               Oppervlakte water
               <br />
               <button>VOLGENDE</button>
@@ -110,39 +191,39 @@ class App extends Component {
                 <tbody>
                   <tr>
                     <td>
-                      <input type="checkbox" name="model-data-gwsw-hydx" value="gwsw-hydx" />
+                      <input type="checkbox" name="model-data-gwsw-hydx" value="gwsw-hydx" checked={this.state.deliveryFormatGWSW} onChange={this.handleChangeDeliveryFormatGWSW} />
                       GWSW Hydx (aanbevolen)
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-verhard-oppervlak" value="verhard-oppervlak" />
+                      <input type="checkbox" name="model-data-verhard-oppervlak" value="verhard-oppervlak" checked={this.state.additionalDataHardenedSurface} onChange={this.handleChangeAdditionalDataHardenedSurface} />
                       Verhard oppervlak
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-bgt-inloopmodel" value="bgt-inloopmodel" />
+                      <input type="checkbox" name="model-data-bgt-inloopmodel" value="bgt-inloopmodel" checked={this.state.hardenedSurfaceBGT} onChange={this.handleChangeHardenedSurfaceBGT} />
                       BGT inloopmodel
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <input type="checkbox" name="model-data-suf-hydx" value="suf-hydx" />
+                      <input type="checkbox" name="model-data-suf-hydx" value="suf-hydx" checked={this.state.deliveryFormatSuf} onChange={this.handleChangeDeliveryFormatSuf} />
                       Suf Hydx (aanbevolen)
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-drinkwater-gebruik" value="drinkwater-gebruik" />
+                      <input type="checkbox" name="model-data-drinkwater-gebruik" value="drinkwater-gebruik" checked={this.state.additionalDataDrinkingWaterUsage} onChange={this.handleChangeAdditionalDataDrinkingWaterUsage} />
                       Drinkwater gebruik
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-anders-2" value="anders-2" />
+                      <input type="checkbox" name="model-data-anders-2" value="anders-2" checked={this.state.hardenedSurfaceOther} onChange={this.handleChangeHardenedSurfaceOther} />
                       Anders
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <input type="checkbox" name="model-data-gbi" value="gbi" />
+                      <input type="checkbox" name="model-data-gbi" value="gbi" checked={this.state.deliveryFormatGBI} onChange={this.handleChangeDeliveryFormatGBI} />
                       GBI
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-bemalings-gebieden" value="bemalings-gebieden" />
+                      <input type="checkbox" name="model-data-bemalings-gebieden" value="bemalings-gebieden" checked={this.state.additionalDataDrainageAreas} onChange={this.handleChangeAdditionalDataDrainageAreas} />
                       Bemalings gebieden
                     </td>
                     <td>
@@ -150,11 +231,11 @@ class App extends Component {
                   </tr>
                   <tr>
                     <td>
-                      <input type="checkbox" name="model-data-anders" value="anders" />
+                      <input type="checkbox" name="model-data-anders" value="anders" checked={this.state.deliveryFormatOther} onChange={this.handleChangedeliveryFormatOther} />
                       Anders
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-andere-data" value="andere-data" />
+                      <input type="checkbox" name="model-data-andere-data" value="andere-data" checked={this.state.additionalDataOtherData} onChange={this.handleChangeAdditionalDataOtherData} />
                       Andere data
                     </td>
                     <td>
@@ -215,7 +296,7 @@ class App extends Component {
             <div>
               5 Folder naam
               <br />
-              <input type="text" name="folder-name" value="" placeholder="Folder" />
+              <input type="text" name="folderName" value={this.state.folderName} onChange={this.handleChangeFolderName} placeholder="Folder" />
               <br />
               <button>VOLGENDE</button>
               <br />
