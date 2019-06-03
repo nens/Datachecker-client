@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import { getPassword } from './GetPassword.js'
+import { getUserName } from './GetUsername.js' 
+
 
 class App extends Component {
   constructor(props, context) {
@@ -41,10 +44,30 @@ class App extends Component {
           console.log("Authentication credentials were not provided.");
           const nextUrl = window.location.href;
           console.log('nextUrl', nextUrl);
-          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+          // window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
         } else {
           console.log("You appear to be logged in");
         }
+
+        const url = "/api/upload/"
+        const opts = {
+          credentials: "same-origin",
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+          },
+          body: JSON.stringify({})
+        };
+        fetch(url, opts)
+        .then(responseParsed => {
+          return responseParsed.json();
+        })
+        .then(parsedBody => {
+          console.log(parsedBody)
+        })
+
+
       });
   }
 
