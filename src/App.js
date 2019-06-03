@@ -21,6 +21,33 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    console.log('component did mount tom');
+    // const url = "https://datachecker.staging.lizard.net/api/upload/";
+    const url = "/api/upload/"
+    const opts = {
+      credentials: "same-origin",
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({})
+    };
+    fetch(url, opts)
+      .then(responseParsed => {
+        return responseParsed.json();
+      })
+      .then(parsedBody => {
+        console.log("parsedBody", parsedBody);
+        if (parsedBody.detail === "Authentication credentials were not provided.") {
+          console.log("Authentication credentials were not provided.");
+          const nextUrl = window.location.href;
+          console.log('nextUrl', nextUrl);
+          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+        } else {
+          console.log("You appear to be logged in");
+        }
+      });
+  }
+
   handleChangeModelTypeRiolering(event) {
     this.setState({modelTypeRiolering: !event.target.modelTypeRiolering});
   }
