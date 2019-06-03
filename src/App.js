@@ -214,20 +214,22 @@ class App extends Component {
           <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
               <br />
-              <br />
-              1 Wat voor model wilt u checken?
-              <br />
+              <div className="step-counter">
+                <span className="step-counter-span">1</span>
+                <span className="step-counter-title">Wat voor model wilt u checken?</span>
+              </div>
               <input type="radio" name="model-type-riolering" value="riolering" checked={this.state.modelTypeRiolering} onChange={this.handleChangeModelTypeRiolering} />
               Riolering
               <br />
               <input type="radio" name="model-type-oppervlakte-water" value="oppervlakte-water" checked={this.state.modelTypeOppervlakteWater} onChange={this.handleChangeModelTypeOppervlakteWater} disabled/>
               Oppervlakte water
-              <br />
-              <br />
             </div>
+            <br />
             <div>
-              2 Uit wat voor data bestaat uw riolering-model?
-              <br />
+              <div className="step-counter">
+                <span className="step-counter-span">2</span>
+                <span className="step-counter-title">Uit wat voor data bestaat uw riolering-model?</span>
+              </div>
               <table>
                 <thead>
                   <tr>
@@ -291,11 +293,13 @@ class App extends Component {
                   </tr>
                 </tbody>
               </table>
-              <br />
             </div>
+            <br />
             <div>
-              3 Upload bestanden voor GWSW Hydx
-              <br />
+              <div className="step-counter">
+                <span className="step-counter-span">3</span>
+                <span className="step-counter-title">Upload bestanden voor GWSW Hydx</span>
+              </div>
               <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
               <br />
               <br />
@@ -342,32 +346,35 @@ class App extends Component {
               Upload bestanden voor Andere data
               <br />
               <input type="file" name="andere-data-file" onChange={this.handleChangeFileAdditionalDataOtherData} />
-              <br />
-              <br />
             </div>
+            <br />
             <div>
-              4 Naam en email-adres
-              <br />
+              <div className="step-counter">
+                <span className="step-counter-span">4</span>
+                <span className="step-counter-title">Naam en email-adres</span>
+              </div>
               <input type="text" name="name" value={this.state.name} onChange={this.handleChangeName} placeholder="Name" />
               <br />
               <input type="text" name="email" value={this.state.email} onChange={this.handleChangeEmail} placeholder="Email" />
-              <br />
-              <br />
             </div>
+            <br />
             <div>
-              5 Folder naam
-              <br />
+              <div className="step-counter">
+                <span className="step-counter-span">5</span>
+                <span className="step-counter-title">Folder naam</span>
+              </div>
               <input type="text" name="folderName" value={this.state.folderName} onChange={this.handleChangeFolderName} placeholder="Folder" />
-              <br />
-              <br />
             </div>
+            <br />
+            <br />
             <div>
               U bent nu klaar. Controleer nog een keer uw aangeleverde data of verzend direct.
               <br />
+              <br />
               <input type="submit" value="VERZENDEN" />
-              <br />
-              <br />
             </div>
+            <br />
+            <br />
           </form>
         </main>
         <footer className="App-footer">

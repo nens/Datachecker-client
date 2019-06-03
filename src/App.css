@@ -23,8 +23,32 @@
 
 .App-main {
   height: 75vh;
-  padding-left: 10px;
+  padding-left: 10%;
   overflow-y: auto;
+}
+
+.step-counter {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: left;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.step-counter-span {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  background-color: #B83729;
+}
+.step-counter-title {
+  margin-left: 10px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 input[type="radio"]:disabled {
