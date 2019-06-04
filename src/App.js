@@ -186,22 +186,58 @@ class App extends Component {
 
   // Step 5
   handleChangeFolderName(event) {
-    this.setState({folderName: event.target.value}); // gives error that this is undefined..
+    this.setState({folderName: event.target.value});
   }
 
   // Submit
   handleSubmit(event) {
     console.log(this.state);
 
-    var fileInput = document.getElementsByName('suf-hyd-file')[0];
-    console.log('fileInput', fileInput, fileInput.files, fileInput.files[0]);
     var form = new FormData();
-    form.append("file", fileInput.files[0]);
+
+    // Append files to the form if they exist
+    // const metadata = {
+    //   username: this.state.name,
+    //   email: this.state.email
+    // };
+    // form.append("metadata", metadata);
+    // Add files for model
+    // Append mandatory file, this will become the first file
+    form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    if (this.state.fileDeliveryFormatSuf[0]) {
+      form.append("fileDeliveryFormatSuf", this.state.fileDeliveryFormatSuf[0]);
+    }
+    if (this.state.fileDeliveryFormatGBI[0]) {
+      form.append("fileDeliveryFormatGBI", this.state.fileDeliveryFormatGBI[0]);
+    }
+    if (this.state.fileDeliveryFormatOther[0]) {
+      form.append("fileDeliveryFormatOther", this.state.fileDeliveryFormatOther[0]);
+    }
+    if (this.state.fileAdditionalDataHardenedSurface[0]) {
+      form.append("fileAdditionalDataHardenedSurface", this.state.fileAdditionalDataHardenedSurface[0]);
+    }
+    if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
+      console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+      form.append("fileAdditionalDataDrinkingWaterUsage", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+    }
+    if (this.state.fileAdditionalDataDrainageAreas[0]) {
+      form.append("fileAdditionalDataDrainageAreas", this.state.fileAdditionalDataDrainageAreas[0]);
+    }
+    if (this.state.fileAdditionalDataOtherData[0]) {
+      form.append("fileAdditionalDataOtherData", this.state.fileAdditionalDataOtherData[0]);
+    }
+    if (this.state.fileHardenedSurfaceBGT[0]) {
+      form.append("fileHardenedSurfaceBGT", this.state.fileHardenedSurfaceBGT[0]);
+    }
+    if (this.state.fileHardenedSurfaceOther[0]) {
+      form.append("fileHardenedSurfaceOther", this.state.fileHardenedSurfaceOther[0]);
+    }
+
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      // headers: { 
+      // headers: {
       //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
       // },
       body: form
@@ -313,8 +349,10 @@ class App extends Component {
             <div>
               <div className="step-counter">
                 <span className="step-counter-span">3</span>
-                <span className="step-counter-title">Upload bestanden voor GWSW Hydx</span>
+                <span className="step-counter-title">Upload bestanden</span>
               </div>
+              Upload bestanden voor GWSW Hydx
+              <br />
               <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
               <br />
               <br />
@@ -372,15 +410,6 @@ class App extends Component {
               <br />
               <input type="text" name="email" value={this.state.email} onChange={this.handleChangeEmail} placeholder="Email" />
             </div>
-            <br />
-            <div>
-              <div className="step-counter">
-                <span className="step-counter-span">5</span>
-                <span className="step-counter-title">Folder naam</span>
-              </div>
-              <input type="text" name="folderName" value={this.state.folderName} onChange={this.handleChangeFolderName} placeholder="Folder" />
-            </div>
-            <br />
             <br />
             <div>
               U bent nu klaar. Controleer nog een keer uw aangeleverde data of verzend direct.
