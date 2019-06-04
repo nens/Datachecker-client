@@ -201,9 +201,10 @@ class App extends Component {
     //   email: this.state.email
     // };
     // form.append("metadata", metadata);
-    // Add files for model
-    // Append mandatory file, this will become the first file
-    form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    // Add files for model, at least one file should be added for the backend
+    if (this.state.fileDeliveryFormatGWSW[0]) {
+      form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    }
     if (this.state.fileDeliveryFormatSuf[0]) {
       form.append("file", this.state.fileDeliveryFormatSuf[0]);
     }
