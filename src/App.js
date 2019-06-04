@@ -423,15 +423,6 @@ class App extends Component {
             </div>
             <br />
             <div>
-              <div className="step-counter">
-                <span className="step-counter-span">5</span>
-                <span className="step-counter-title">Folder naam</span>
-              </div>
-              <input type="text" name="folderName" value={this.state.folderName} onChange={this.handleChangeFolderName} placeholder="Folder" />
-            </div>
-            <br />
-            <br />
-            <div>
               U bent nu klaar. Controleer nog een keer uw aangeleverde data of verzend direct.
               <br />
               <br />
