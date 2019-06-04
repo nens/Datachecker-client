@@ -356,8 +356,10 @@ class App extends Component {
             <div>
               <div className="step-counter">
                 <span className="step-counter-span">3</span>
-                <span className="step-counter-title">Upload bestanden voor GWSW Hydx</span>
+                <span className="step-counter-title">Upload bestanden</span>
               </div>
+              Upload bestanden voor GWSW Hydx
+              <br />
               <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
               <br />
               <br />
