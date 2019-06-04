@@ -93,7 +93,7 @@ class App extends Component {
           console.log("Authentication credentials were not provided.");
           const nextUrl = window.location.href;
           // next line needs be active on prod, but commented out on dev
-          // window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
         } else {
           console.log("You appear to be logged in");
         }
@@ -201,9 +201,9 @@ class App extends Component {
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      headers: {
-        'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-      },
+      // headers: {
+      //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+      // },
       body: form
     };
     fetch(url, opts)
