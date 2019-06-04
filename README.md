@@ -1,3 +1,37 @@
+In order to get this project running locally for dev some code changes are required
+
+* comment in the following lines in App.js:
+This makes sure that on dev basic authentication is used instead of the sso.
+We could not get the sso working on dev
+"""
+// headers: { 
+//   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+// },
+"""
+should become:
+"""
+headers: { 
+  'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+},
+"""
+
+
+* Set your username in the function "getUserName" in file GetUserName.js
+* Set your password in the function "getPassword" in file GetPassword.js
+! Make sure not to commit any of these changes !
+
+* comment out the following line that would redirect to the sso in production:
+"""
+window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+"""
+becomes:
+"""
+// window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+"""
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
