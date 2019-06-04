@@ -186,17 +186,14 @@ class App extends Component {
 
   // Step 5
   handleChangeFolderName(event) {
-    this.setState({folderName: event.target.value}); // gives error that this is undefined..
+    this.setState({folderName: event.target.value});
   }
 
   // Submit
   handleSubmit(event) {
     console.log(this.state);
 
-    // var fileInput = document.getElementsByName('suf-hyd-file')[0];
-    // console.log('fileInput', fileInput, fileInput.files, fileInput.files[0]);
     var form = new FormData();
-    // form.append("file", fileInput.files[0]);
 
     // Append files to the form if they exist
     if (this.state.fileDeliveryFormatGWSW[0]) {
