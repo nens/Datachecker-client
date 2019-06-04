@@ -1,36 +1,4 @@
-In order to get this project running locally for dev some code changes are required
-
-* comment in the following lines in App.js:
-This makes sure that on dev basic authentication is used instead of the sso.
-We could not get the sso working on dev
-"""
-// headers: { 
-//   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-// },
-"""
-should become:
-"""
-headers: { 
-  'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-},
-"""
-
-
-* Set your username in the function "getUserName" in file GetUserName.js
-* Set your password in the function "getPassword" in file GetPassword.js
-! Make sure not to commit any of these changes !
-
-* comment out the following line that would redirect to the sso in production:
-"""
-window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
-"""
-becomes:
-"""
-// window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
-"""
-
-
-
+## Create react app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -45,6 +13,44 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+## Authentication on dev
+
+We didnot get the sso to work on dev.
+We therefore resorted to basic auth instead.
+This has the disadvantage that dev works different from prod and that a username password needs to be hardcoded on client.
+In order to get this project running locally for dev these code changes are required:
+
+* comment in the following lines in App.js. 
+```javascript
+// headers: { 
+//   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+// },
+```
+should become:
+```javascript
+headers: { 
+  'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+},
+```
+
+
+* Set your username in the function "getUserName" in file GetUserName.js
+* Set your password in the function "getPassword" in file GetPassword.js
+
+***! Make sure not to commit usernames and passwords !***
+
+
+* comment out the following line that would redirect to the sso in production:
+```javascript
+window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+```
+should become:
+```javascript
+// window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+```
+
+***! Revert all these changes before making a production build and do not commit any of these changes !***
 
 ### `npm test`
 
