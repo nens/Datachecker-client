@@ -193,15 +193,58 @@ class App extends Component {
   handleSubmit(event) {
     console.log(this.state);
 
-    var fileInput = document.getElementsByName('suf-hyd-file')[0];
-    console.log('fileInput', fileInput, fileInput.files, fileInput.files[0]);
+    // var fileInput = document.getElementsByName('suf-hyd-file')[0];
+    // console.log('fileInput', fileInput, fileInput.files, fileInput.files[0]);
     var form = new FormData();
-    form.append("file", fileInput.files[0]);
+    // form.append("file", fileInput.files[0]);
+
+    // Append files to the form if they exist
+    if (this.state.fileDeliveryFormatGWSW[0]) {
+      console.log(this.state.fileDeliveryFormatGWSW[0]);
+      form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    }
+    if (this.state.fileDeliveryFormatSuf[0]) {
+      console.log(this.state.fileDeliveryFormatSuf[0]);
+      form.append("file2", this.state.fileDeliveryFormatSuf[0]);
+    }
+    if (this.state.fileDeliveryFormatGBI[0]) {
+      console.log(this.state.fileDeliveryFormatGBI[0]);
+      form.append("file3", this.state.fileDeliveryFormatGBI[0]);
+    }
+    if (this.state.fileDeliveryFormatOther[0]) {
+      console.log(this.state.fileDeliveryFormatOther[0]);
+      form.append("file4", this.state.fileDeliveryFormatOther[0]);
+    }
+    if (this.state.fileAdditionalDataHardenedSurface[0]) {
+      console.log(this.state.fileAdditionalDataHardenedSurface[0]);
+      form.append("file5", this.state.fileAdditionalDataHardenedSurface[0]);
+    }
+    if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
+      console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+      form.append("file6", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+    }
+    if (this.state.fileAdditionalDataDrainageAreas[0]) {
+      console.log(this.state.fileAdditionalDataDrainageAreas[0]);
+      form.append("file7", this.state.fileAdditionalDataDrainageAreas[0]);
+    }
+    if (this.state.fileAdditionalDataOtherData[0]) {
+      console.log(this.state.fileAdditionalDataOtherData[0]);
+      form.append("file8", this.state.fileAdditionalDataOtherData[0]);
+    }
+    if (this.state.fileHardenedSurfaceBGT[0]) {
+      console.log(this.state.fileHardenedSurfaceBGT[0]);
+      form.append("file9", this.state.fileHardenedSurfaceBGT[0]);
+    }
+    if (this.state.fileHardenedSurfaceOther[0]) {
+      console.log(this.state.fileHardenedSurfaceOther[0]);
+      form.append("file10", this.state.fileHardenedSurfaceOther[0]);
+    }
+
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      // headers: { 
+      // headers: {
       //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
       // },
       body: form
