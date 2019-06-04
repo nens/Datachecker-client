@@ -77,9 +77,9 @@ class App extends Component {
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      headers: { 
-        'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-      },
+      // headers: { 
+      //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+      // },
       body: form
     };
     fetch(url, opts)
