@@ -201,36 +201,37 @@ class App extends Component {
     //   email: this.state.email
     // };
     // form.append("metadata", metadata);
-    // Add files for model
-    // Append mandatory file, this will become the first file
-    form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    // Add files for model, at least one file should be added for the backend
+    if (this.state.fileDeliveryFormatGWSW[0]) {
+      form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+    }
     if (this.state.fileDeliveryFormatSuf[0]) {
-      form.append("fileDeliveryFormatSuf", this.state.fileDeliveryFormatSuf[0]);
+      form.append("file", this.state.fileDeliveryFormatSuf[0]);
     }
     if (this.state.fileDeliveryFormatGBI[0]) {
-      form.append("fileDeliveryFormatGBI", this.state.fileDeliveryFormatGBI[0]);
+      form.append("file", this.state.fileDeliveryFormatGBI[0]);
     }
     if (this.state.fileDeliveryFormatOther[0]) {
-      form.append("fileDeliveryFormatOther", this.state.fileDeliveryFormatOther[0]);
+      form.append("file", this.state.fileDeliveryFormatOther[0]);
     }
     if (this.state.fileAdditionalDataHardenedSurface[0]) {
-      form.append("fileAdditionalDataHardenedSurface", this.state.fileAdditionalDataHardenedSurface[0]);
+      form.append("file", this.state.fileAdditionalDataHardenedSurface[0]);
     }
     if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
       console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
-      form.append("fileAdditionalDataDrinkingWaterUsage", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+      form.append("file", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
     }
     if (this.state.fileAdditionalDataDrainageAreas[0]) {
-      form.append("fileAdditionalDataDrainageAreas", this.state.fileAdditionalDataDrainageAreas[0]);
+      form.append("file", this.state.fileAdditionalDataDrainageAreas[0]);
     }
     if (this.state.fileAdditionalDataOtherData[0]) {
-      form.append("fileAdditionalDataOtherData", this.state.fileAdditionalDataOtherData[0]);
+      form.append("file", this.state.fileAdditionalDataOtherData[0]);
     }
     if (this.state.fileHardenedSurfaceBGT[0]) {
-      form.append("fileHardenedSurfaceBGT", this.state.fileHardenedSurfaceBGT[0]);
+      form.append("file", this.state.fileHardenedSurfaceBGT[0]);
     }
     if (this.state.fileHardenedSurfaceOther[0]) {
-      form.append("fileHardenedSurfaceOther", this.state.fileHardenedSurfaceOther[0]);
+      form.append("file", this.state.fileHardenedSurfaceOther[0]);
     }
 
     const url = "/api/upload/"
@@ -286,7 +287,14 @@ class App extends Component {
                   <tr>
                     <td>Aanleverformaat</td>
                     <td>Aanvullende data</td>
-                    <td>Verhard oppervlak</td>
+                    <td>
+                      {(this.state.additionalDataHardenedSurface) ?
+                          (<div>
+                            Verhard oppervlak
+                          </div>)
+                        : null
+                      }
+                    </td>
                   </tr>
                 </thead>
                 <tbody>
@@ -300,8 +308,13 @@ class App extends Component {
                       Verhard oppervlak
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-bgt-inloopmodel" value="bgt-inloopmodel" checked={this.state.hardenedSurfaceBGT} onChange={this.handleChangeHardenedSurfaceBGT} />
-                      BGT inloopmodel
+                      {(this.state.additionalDataHardenedSurface) ?
+                          (<div>
+                            <input type="checkbox" name="model-data-bgt-inloopmodel" value="bgt-inloopmodel" checked={this.state.hardenedSurfaceBGT} onChange={this.handleChangeHardenedSurfaceBGT} />
+                            BGT inloopmodel
+                          </div>)
+                        : null
+                      }
                     </td>
                   </tr>
                   <tr>
@@ -314,8 +327,13 @@ class App extends Component {
                       Drinkwater gebruik
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-anders-2" value="anders-2" checked={this.state.hardenedSurfaceOther} onChange={this.handleChangeHardenedSurfaceOther} />
-                      Anders
+                      {(this.state.additionalDataHardenedSurface) ?
+                          (<div>
+                            <input type="checkbox" name="model-data-anders-2" value="anders-2" checked={this.state.hardenedSurfaceOther} onChange={this.handleChangeHardenedSurfaceOther} />
+                            Anders
+                          </div>)
+                        : null
+                      }
                     </td>
                   </tr>
                   <tr>
@@ -351,54 +369,105 @@ class App extends Component {
                 <span className="step-counter-span">3</span>
                 <span className="step-counter-title">Upload bestanden</span>
               </div>
-              Upload bestanden voor GWSW Hydx
-              <br />
-              <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
-              <br />
-              <br />
-              Upload bestanden voor Suf-Hyd
-              <br />
-              <input type="file" name="suf-hyd-file" onChange={this.handleChangeFileDeliveryFormatSuf} />
-              <br />
-              <br />
-              Upload bestanden voor GBI
-              <br />
-              <input type="file" name="gbi-file" onChange={this.handleChangeFileDeliveryFormatGBI} />
-              <br />
-              <br />
-              Upload bestanden voor een ander aanleverformaat
-              <br />
-              <input type="file" name="ander-file" onChange={this.handleChangeFileDeliveryFormatOther} />
-              <br />
-              <br />
-              Upload bestanden voor Verhard oppervlak
-              <br />
-              <input type="file" name="verhard-oppervlak-file" onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
-              <br />
-              <br />
-              Upload bestanden voor Verhard oppervlak - BGT inloopmodel
-              <br />
-              <input type="file" name="verhard-oppervlak-bgt-file" onChange={this.handleChangeFileHardenedSurfaceBGT} />
-              <br />
-              <br />
-              Upload bestanden voor Verhard oppervlak - Anders
-              <br />
-              <input type="file" name="verhard-oppervlak-anders-file" onChange={this.handleChangeFileHardenedSurfaceOther} />
-              <br />
-              <br />
-              Upload bestanden voor Drinkwater gebruik
-              <br />
-              <input type="file" name="drinkwater-gebruik-file" onChange={this.handleChangeFileAdditionalDataDrinkingWaterUsage} />
-              <br />
-              <br />
-              Upload bestanden voor Bemalings Gebieden
-              <br />
-              <input type="file" name="bemalings-gebieden-file" onChange={this.handleChangeFileAdditionalDataDrainageAreas} />
-              <br />
-              <br />
-              Upload bestanden voor Andere data
-              <br />
-              <input type="file" name="andere-data-file" onChange={this.handleChangeFileAdditionalDataOtherData} />
+              {
+                (this.state.deliveryFormatGWSW) ?
+                  (<div>
+                    Upload bestanden voor GWSW Hydx
+                    <br />
+                    <input type="file" name="gwsw-hydx-file" onChange={this.handleChangeFileDeliveryFormatGWSW} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.deliveryFormatSuf) ?
+                  (<div>
+                    Upload bestanden voor Suf-Hyd
+                    <br />
+                    <input type="file" name="suf-hyd-file" onChange={this.handleChangeFileDeliveryFormatSuf} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.deliveryFormatGBI) ?
+                  (<div>
+                    Upload bestanden voor GBI
+                    <br />
+                    <input type="file" name="gbi-file" onChange={this.handleChangeFileDeliveryFormatGBI} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.deliveryFormatOther) ?
+                  (<div>
+                    Upload bestanden voor een ander aanleverformaat
+                    <br />
+                    <input type="file" name="ander-file" onChange={this.handleChangeFileDeliveryFormatOther} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.additionalDataHardenedSurface) ?
+                  (<div>
+                    Upload bestanden voor Verhard oppervlak
+                    <br />
+                    <input type="file" name="verhard-oppervlak-file" onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.hardenedSurfaceBGT) ?
+                  (<div>
+                    Upload bestanden voor Verhard oppervlak - BGT inloopmodel
+                    <br />
+                    <input type="file" name="verhard-oppervlak-bgt-file" onChange={this.handleChangeFileHardenedSurfaceBGT} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.hardenedSurfaceOther) ?
+                  (<div>
+                    Upload bestanden voor Verhard oppervlak - Anders
+                    <br />
+                    <input type="file" name="verhard-oppervlak-anders-file" onChange={this.handleChangeFileHardenedSurfaceOther} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.additionalDataDrinkingWaterUsage) ?
+                  (<div>
+                    Upload bestanden voor Drinkwater gebruik
+                    <br />
+                    <input type="file" name="drinkwater-gebruik-file" onChange={this.handleChangeFileAdditionalDataDrinkingWaterUsage} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.additionalDataDrainageAreas) ?
+                  (<div>
+                    Upload bestanden voor Bemalings Gebieden
+                    <br />
+                    <input type="file" name="bemalings-gebieden-file" onChange={this.handleChangeFileAdditionalDataDrainageAreas} />
+                    <br />
+                    <br />
+                  </div>)
+                : null
+              }
+              {(this.state.additionalDataOtherData) ?
+                  (<div>
+                    Upload bestanden voor Andere data
+                    <br />
+                    <input type="file" name="andere-data-file" onChange={this.handleChangeFileAdditionalDataOtherData} />
+                  </div>)
+                : null
+              }
             </div>
             <br />
             <div>
