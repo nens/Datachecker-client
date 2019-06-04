@@ -93,7 +93,7 @@ class App extends Component {
           console.log("Authentication credentials were not provided.");
           const nextUrl = window.location.href;
           // next line needs be active on prod, but commented out on dev
-          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+          // window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
         } else {
           console.log("You appear to be logged in");
         }
@@ -196,54 +196,61 @@ class App extends Component {
     var form = new FormData();
 
     // Append files to the form if they exist
+    // Append mandatory file, this will become the metadatafile
+    const metadata = {
+      username: this.state.name,
+      email: this.state.email
+    };
+    form.append("file", metadata);
+    // Add files for model
     if (this.state.fileDeliveryFormatGWSW[0]) {
       console.log(this.state.fileDeliveryFormatGWSW[0]);
-      form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+      form.append("fileDeliveryFormatGWSW", this.state.fileDeliveryFormatGWSW[0]);
     }
     if (this.state.fileDeliveryFormatSuf[0]) {
       console.log(this.state.fileDeliveryFormatSuf[0]);
-      form.append("file2", this.state.fileDeliveryFormatSuf[0]);
+      form.append("fileDeliveryFormatSuf", this.state.fileDeliveryFormatSuf[0]);
     }
     if (this.state.fileDeliveryFormatGBI[0]) {
       console.log(this.state.fileDeliveryFormatGBI[0]);
-      form.append("file3", this.state.fileDeliveryFormatGBI[0]);
+      form.append("fileDeliveryFormatGBI", this.state.fileDeliveryFormatGBI[0]);
     }
     if (this.state.fileDeliveryFormatOther[0]) {
       console.log(this.state.fileDeliveryFormatOther[0]);
-      form.append("file4", this.state.fileDeliveryFormatOther[0]);
+      form.append("fileDeliveryFormatOther", this.state.fileDeliveryFormatOther[0]);
     }
     if (this.state.fileAdditionalDataHardenedSurface[0]) {
       console.log(this.state.fileAdditionalDataHardenedSurface[0]);
-      form.append("file5", this.state.fileAdditionalDataHardenedSurface[0]);
+      form.append("fileAdditionalDataHardenedSurface", this.state.fileAdditionalDataHardenedSurface[0]);
     }
     if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
       console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
-      form.append("file6", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+      form.append("fileAdditionalDataDrinkingWaterUsage", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
     }
     if (this.state.fileAdditionalDataDrainageAreas[0]) {
       console.log(this.state.fileAdditionalDataDrainageAreas[0]);
-      form.append("file7", this.state.fileAdditionalDataDrainageAreas[0]);
+      form.append("fileAdditionalDataDrainageAreas", this.state.fileAdditionalDataDrainageAreas[0]);
     }
     if (this.state.fileAdditionalDataOtherData[0]) {
       console.log(this.state.fileAdditionalDataOtherData[0]);
-      form.append("file8", this.state.fileAdditionalDataOtherData[0]);
+      form.append("fileAdditionalDataOtherData", this.state.fileAdditionalDataOtherData[0]);
     }
     if (this.state.fileHardenedSurfaceBGT[0]) {
       console.log(this.state.fileHardenedSurfaceBGT[0]);
-      form.append("file9", this.state.fileHardenedSurfaceBGT[0]);
+      form.append("fileHardenedSurfaceBGT", this.state.fileHardenedSurfaceBGT[0]);
     }
     if (this.state.fileHardenedSurfaceOther[0]) {
       console.log(this.state.fileHardenedSurfaceOther[0]);
-      form.append("file10", this.state.fileHardenedSurfaceOther[0]);
+      form.append("fileHardenedSurfaceOther", this.state.fileHardenedSurfaceOther[0]);
     }
 
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      // headers: {
-      //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-      // },
+      headers: {
+        'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+      },
       body: form
     };
     fetch(url, opts)
