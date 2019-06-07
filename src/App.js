@@ -75,33 +75,25 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  
   componentDidMount() {
-    
+
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
-      method: "GET",
+      method: "OPTIONS",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(url, opts)
-      .then(responseParsed => {
-        return responseParsed.json();
-      })
-      .then(parsedBody => {
-        if (parsedBody.detail === "Authentication credentials were not provided.") {
-          console.log("Authentication credentials were not provided.");
-          const nextUrl = window.location.href;
-          // next line needs be active on prod, but commented out on dev
-          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
-        } else {
-          console.log("You appear to be logged in");
-        }
+    fetch(url, opts).then(function(response) {
+      if (response.status == 403) {
+        console.log("Authentication credentials were not provided.");
+        const nextUrl = window.location.href;
+        // next line needs be active on prod, but commented out on dev
+        window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+      } else {
+        console.log("You appear to be logged in");
+      }
+    });
 
-        
-
-
-      });
   }
 
   // Step 1
