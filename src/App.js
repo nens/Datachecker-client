@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 
 import { getPassword } from './GetPassword.js'
-import { getUserName } from './GetUsername.js' 
+import { getUserName } from './GetUsername.js'
+import * as Cookies from 'js-cookie';
 
 
 class App extends Component {
@@ -226,22 +227,18 @@ class App extends Component {
       form.append("file", this.state.fileHardenedSurfaceOther[0]);
     }
 
-    const url = "/api/upload/"
+    const csrftoken = Cookies.get('csrftoken');
+    const url = "/api/upload/";
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      // headers: {
-      //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-      // },
+      headers: {
+        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+        'X-CSRFToken': csrftoken
+      },
       body: form
     };
-    fetch(url, opts)
-    .then(responseParsed => {
-      return responseParsed.json();
-    })
-    .then(parsedBody => {
-      console.log(parsedBody)
-    })
+    fetch(url, opts);
     event.preventDefault();
   }
 
