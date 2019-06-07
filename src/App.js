@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 
 import { getPassword } from './GetPassword.js'
-import { getUserName } from './GetUsername.js' 
+import { getUserName } from './GetUsername.js'
+import * as Cookies from 'js-cookie';
 
 
 class App extends Component {
@@ -75,33 +76,25 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  
   componentDidMount() {
-    
+
     const url = "/api/upload/"
     const opts = {
       credentials: "same-origin",
-      method: "GET",
+      method: "OPTIONS",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(url, opts)
-      .then(responseParsed => {
-        return responseParsed.json();
-      })
-      .then(parsedBody => {
-        if (parsedBody.detail === "Authentication credentials were not provided.") {
-          console.log("Authentication credentials were not provided.");
-          const nextUrl = window.location.href;
-          // next line needs be active on prod, but commented out on dev
-          window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
-        } else {
-          console.log("You appear to be logged in");
-        }
+    fetch(url, opts).then(function(response) {
+      if (response.status == 403) {
+        console.log("Authentication credentials were not provided.");
+        const nextUrl = window.location.href;
+        // next line needs be active on prod, but commented out on dev
+        window.location.href = `${"/accounts/login/"}?next=${nextUrl}`;
+      } else {
+        console.log("You appear to be logged in");
+      }
+    });
 
-        
-
-
-      });
   }
 
   // Step 1
@@ -234,22 +227,18 @@ class App extends Component {
       form.append("file", this.state.fileHardenedSurfaceOther[0]);
     }
 
-    const url = "/api/upload/"
+    const csrftoken = Cookies.get('csrftoken');
+    const url = "/api/upload/";
     const opts = {
       credentials: "same-origin",
       method: "POST",
-      // headers: {
-      //   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
-      // },
+      headers: {
+        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+        'X-CSRFToken': csrftoken
+      },
       body: form
     };
-    fetch(url, opts)
-    .then(responseParsed => {
-      return responseParsed.json();
-    })
-    .then(parsedBody => {
-      console.log(parsedBody)
-    })
+    fetch(url, opts);
     event.preventDefault();
   }
 
