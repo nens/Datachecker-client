@@ -358,8 +358,7 @@ class App extends Component {
                 <span className="step-counter-span">3</span>
                 <span className="step-counter-title">Upload bestanden</span>
               </div>
-              {
-                (this.state.deliveryFormatGWSW) ?
+              {(this.state.deliveryFormatGWSW) ?
                   (<div>
                     Upload bestanden voor GWSW Hydx
                     <br />
@@ -394,16 +393,6 @@ class App extends Component {
                     Upload bestanden voor een ander aanleverformaat
                     <br />
                     <input type="file" name="ander-file" onChange={this.handleChangeFileDeliveryFormatOther} />
-                    <br />
-                    <br />
-                  </div>)
-                : null
-              }
-              {(this.state.additionalDataHardenedSurface) ?
-                  (<div>
-                    Upload bestanden voor Verhard oppervlak
-                    <br />
-                    <input type="file" name="verhard-oppervlak-file" onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
                     <br />
                     <br />
                   </div>)
