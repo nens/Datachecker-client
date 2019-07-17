@@ -189,43 +189,61 @@ class App extends Component {
     var form = new FormData();
 
     // Append files to the form if they exist
-    // const metadata = {
-    //   username: this.state.name,
-    //   email: this.state.email
-    // };
-    // form.append("metadata", metadata);
+    const metadata = {
+      username: this.state.name,
+      email: this.state.email
+    };
     // Add files for model, at least one file should be added for the backend
     if (this.state.fileDeliveryFormatGWSW[0]) {
       form.append("file", this.state.fileDeliveryFormatGWSW[0]);
+      metadata.fileDeliveryFormatGWSW = this.state.fileDeliveryFormatGWSW[0];
     }
     if (this.state.fileDeliveryFormatSuf[0]) {
       form.append("file", this.state.fileDeliveryFormatSuf[0]);
+      metadata.fileDeliveryFormatSuf = this.state.fileDeliveryFormatSuf[0];
     }
     if (this.state.fileDeliveryFormatGBI[0]) {
       form.append("file", this.state.fileDeliveryFormatGBI[0]);
+      metadata.fileDeliveryFormatGBI = this.state.fileDeliveryFormatGBI[0];
     }
     if (this.state.fileDeliveryFormatOther[0]) {
       form.append("file", this.state.fileDeliveryFormatOther[0]);
+      metadata.fileDeliveryFormatOther = this.state.fileDeliveryFormatOther[0];
     }
     if (this.state.fileAdditionalDataHardenedSurface[0]) {
       form.append("file", this.state.fileAdditionalDataHardenedSurface[0]);
+      metadata.fileAdditionalDataHardenedSurface = this.state.fileAdditionalDataHardenedSurface[0];
     }
     if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
-      console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
       form.append("file", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
+      metadata.fileAdditionalDataDrinkingWaterUsage = this.state.fileAdditionalDataDrinkingWaterUsage[0];
     }
     if (this.state.fileAdditionalDataDrainageAreas[0]) {
       form.append("file", this.state.fileAdditionalDataDrainageAreas[0]);
+      metadata.fileAdditionalDataDrainageAreas = this.state.fileAdditionalDataDrainageAreas[0];
     }
     if (this.state.fileAdditionalDataOtherData[0]) {
       form.append("file", this.state.fileAdditionalDataOtherData[0]);
+      metadata.fileAdditionalDataOtherData = this.state.fileAdditionalDataOtherData[0];
     }
     if (this.state.fileHardenedSurfaceBGT[0]) {
       form.append("file", this.state.fileHardenedSurfaceBGT[0]);
+      metadata.fileHardenedSurfaceBGT = this.state.fileHardenedSurfaceBGT[0];
     }
     if (this.state.fileHardenedSurfaceOther[0]) {
       form.append("file", this.state.fileHardenedSurfaceOther[0]);
+      metadata.fileHardenedSurfaceOther = this.state.fileHardenedSurfaceOther[0];
     }
+    console.log(metadata);
+    form.append("metadata", metadata);
+
+    // FormData
+    for (var pair of form.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
+    // console.log(form.entries[0]);
+    console.log(form.getAll('file'));
+    console.log(JSON.stringify(form.get('metadata.username')));
 
     const csrftoken = Cookies.get('csrftoken');
     const url = "/api/upload/";
@@ -252,7 +270,7 @@ class App extends Component {
           <div className="App-header-bottom"></div>
         </header>
         <main className="App-main">
-          <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
               <br />
               <div className="step-counter">
