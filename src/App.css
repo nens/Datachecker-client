@@ -54,6 +54,9 @@
 input[type="radio"]:disabled {
   cursor: not-allowed;
 }
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
 .not-available {
   color: #a9a9a9;
 }
