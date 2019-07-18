@@ -263,7 +263,7 @@ class App extends Component {
               Riolering
               <br />
               <input type="radio" name="model-type-oppervlakte-water" value="oppervlakte-water" checked={this.state.modelTypeOppervlakteWater} onChange={this.handleChangeModelTypeOppervlakteWater} disabled/>
-              Oppervlakte water
+                      <span className="not-available">Oppervlakte water</span>
             </div>
             <br />
             <div>
@@ -275,7 +275,7 @@ class App extends Component {
                 <thead>
                   <tr>
                     <td>Aanleverformaat</td>
-                    <td>Aanvullende data</td>
+                    <td><span className="not-available">Aanvullende data</span></td>
                     <td>
                       {(this.state.additionalDataHardenedSurface) ?
                           (<div>
@@ -293,8 +293,8 @@ class App extends Component {
                       GWSW Hydx (aanbevolen)
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-verhard-oppervlak" value="verhard-oppervlak" checked={this.state.additionalDataHardenedSurface} onChange={this.handleChangeAdditionalDataHardenedSurface} />
-                      Verhard oppervlak
+                      <input type="checkbox" name="model-data-verhard-oppervlak" value="verhard-oppervlak" checked={this.state.additionalDataHardenedSurface} onChange={this.handleChangeAdditionalDataHardenedSurface} disabled />
+                      <span className="not-available">Verhard oppervlak</span>
                     </td>
                     <td>
                       {(this.state.additionalDataHardenedSurface) ?
@@ -312,8 +312,8 @@ class App extends Component {
                       Suf Hydx (aanbevolen)
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-drinkwater-gebruik" value="drinkwater-gebruik" checked={this.state.additionalDataDrinkingWaterUsage} onChange={this.handleChangeAdditionalDataDrinkingWaterUsage} />
-                      Drinkwater gebruik
+                      <input type="checkbox" name="model-data-drinkwater-gebruik" value="drinkwater-gebruik" checked={this.state.additionalDataDrinkingWaterUsage} onChange={this.handleChangeAdditionalDataDrinkingWaterUsage} disabled />
+                      <span className="not-available">Drinkwater gebruik</span>
                     </td>
                     <td>
                       {(this.state.additionalDataHardenedSurface) ?
@@ -331,20 +331,20 @@ class App extends Component {
                       GBI
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-bemalings-gebieden" value="bemalings-gebieden" checked={this.state.additionalDataDrainageAreas} onChange={this.handleChangeAdditionalDataDrainageAreas} />
-                      Bemalings gebieden
+                      <input type="checkbox" name="model-data-bemalings-gebieden" value="bemalings-gebieden" checked={this.state.additionalDataDrainageAreas} onChange={this.handleChangeAdditionalDataDrainageAreas} disabled />
+                      <span className="not-available">Bemalings gebieden</span>
                     </td>
                     <td>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <input type="checkbox" name="model-data-anders" value="anders" checked={this.state.deliveryFormatOther} onChange={this.handleChangedeliveryFormatOther} />
-                      Anders
+                      <input type="checkbox" name="model-data-anders" value="anders" checked={this.state.deliveryFormatOther} onChange={this.handleChangedeliveryFormatOther} disabled />
+                      <span className="not-available">Anders</span>
                     </td>
                     <td>
-                      <input type="checkbox" name="model-data-andere-data" value="andere-data" checked={this.state.additionalDataOtherData} onChange={this.handleChangeAdditionalDataOtherData} />
-                      Andere data
+                      <input type="checkbox" name="model-data-andere-data" value="andere-data" checked={this.state.additionalDataOtherData} onChange={this.handleChangeAdditionalDataOtherData} disabled />
+                      <span className="not-available">Andere data</span>
                     </td>
                     <td>
                     </td>
@@ -358,8 +358,7 @@ class App extends Component {
                 <span className="step-counter-span">3</span>
                 <span className="step-counter-title">Upload bestanden</span>
               </div>
-              {
-                (this.state.deliveryFormatGWSW) ?
+              {(this.state.deliveryFormatGWSW) ?
                   (<div>
                     Upload bestanden voor GWSW Hydx
                     <br />
@@ -394,16 +393,6 @@ class App extends Component {
                     Upload bestanden voor een ander aanleverformaat
                     <br />
                     <input type="file" name="ander-file" onChange={this.handleChangeFileDeliveryFormatOther} />
-                    <br />
-                    <br />
-                  </div>)
-                : null
-              }
-              {(this.state.additionalDataHardenedSurface) ?
-                  (<div>
-                    Upload bestanden voor Verhard oppervlak
-                    <br />
-                    <input type="file" name="verhard-oppervlak-file" onChange={this.handleChangeFileAdditionalDataHardenedSurface} />
                     <br />
                     <br />
                   </div>)
@@ -480,6 +469,7 @@ class App extends Component {
           </form>
         </main>
         <footer className="App-footer">
+            Welkom op de Datachecker!
         </footer>
       </div>
     );

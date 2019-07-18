@@ -54,8 +54,18 @@
 input[type="radio"]:disabled {
   cursor: not-allowed;
 }
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+.not-available {
+  color: #a9a9a9;
+}
 
 .App-footer {
+  display: flex;
   height: 10vh;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
   background-color: #c3c3c3;
 }
