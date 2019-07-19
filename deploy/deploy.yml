@@ -5,5 +5,5 @@
   tasks:
   - name: copy
     copy:
-      src: ../
-      dest: /srv/datachecker-client/
+      src: ../build/
+      dest: /srv/datachecker-client/build/
