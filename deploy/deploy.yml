@@ -1,0 +1,9 @@
+---
+- hosts: webserver
+  gather_facts: false
+
+  tasks:
+  - name: copy
+    copy:
+      src: ../
+      dest: /srv/datachecker-client/
