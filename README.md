@@ -99,10 +99,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ma
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+### Deploy the client:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Deploy the entire repo to the server:
 
-### `npm run build` fails to minify
+```
+ansible-playbook -i staging -u buildout deploy.yml
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+NB: Assumed is that your ssh public key has been added to buildout's authorized_keys.
