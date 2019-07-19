@@ -101,7 +101,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 ### Deploy the client:
 
-Deploy the entire repo to the server:
+Deploy the build to the server:
+
+* Run `npm run build` to create a build in the build folder
+
+* Go to the deploy folder
+
+* Run `ansible-playbook -i staging deploy.yml` to deploy the build to staging.
 
 ```
 ansible-playbook -i staging -u buildout deploy.yml
