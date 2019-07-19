@@ -1,6 +1,8 @@
 ---
 - hosts: webservers
   gather_facts: false
+  become: yes
+  become_user: buildout
 
   tasks:
   - name: copy
