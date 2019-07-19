@@ -109,8 +109,4 @@ Deploy the build to the server:
 
 * Run `ansible-playbook -i staging deploy.yml` to deploy the build to staging.
 
-```
-ansible-playbook -i staging -u buildout deploy.yml
-```
-
 NB: Assumed is that your ssh public key has been added to buildout's authorized_keys.
