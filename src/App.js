@@ -11,7 +11,7 @@ class App extends Component {
     super(props, context);
     this.state = {
       // Step 1
-      modelTypeRiolering: false,
+      modelTypeRiolering: true,
       modelTypeOppervlakteWater: false,
       // Step 2
       deliveryFormatGWSW: false,
@@ -184,7 +184,6 @@ class App extends Component {
 
   // Submit
   handleSubmit(event) {
-    console.log(this.state);
 
     var form = new FormData();
 
