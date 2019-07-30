@@ -237,7 +237,12 @@ class App extends Component {
       },
       body: form
     };
-    fetch(url, opts);
+    fetch(url, opts)
+      .catch(error => {
+        console.log(error);
+        alert(error);
+      })
+    ;
     event.preventDefault();
   }
 
