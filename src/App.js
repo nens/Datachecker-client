@@ -238,12 +238,21 @@ class App extends Component {
       body: form
     };
     fetch(url, opts)
+      .then(handleErrors)
+      .then(response => alert("Bestanden zijn verstuurd.") )
       .catch(error => {
         console.log(error);
         alert(error);
       })
     ;
     event.preventDefault();
+  }
+
+  handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
   }
 
   render() {
