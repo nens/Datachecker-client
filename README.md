@@ -29,6 +29,7 @@ In order to get this project running locally for dev these code changes are requ
 ```
 should become:
 ```javascript
+
 headers: { 
   'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
 },
@@ -108,5 +109,3 @@ Deploy the build to the server:
 * Go to the deploy folder
 
 * Run `ansible-playbook -i staging deploy.yml` to deploy the build to staging.
-
-NB: Assumed is that your ssh public key has been added to buildout's authorized_keys.
