@@ -232,27 +232,48 @@ class App extends Component {
       credentials: "same-origin",
       method: "POST",
       headers: {
-        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+        // next line needs be commented out on prod, but active on dev
+        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword()),
         'X-CSRFToken': csrftoken
       },
       body: form
     };
+    var responseResult = {};
     fetch(url, opts)
-      .then(handleErrors)
-      .then(response => alert("Bestanden zijn verstuurd.") )
-      .catch(error => {
-        console.log(error);
-        alert(error);
-      })
-    ;
-    event.preventDefault();
-  }
+      .then(response => {
 
-  handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
+        responseResult = response;
+        if (response.status < 300) {
+          return response;
+        } else {
+          return response.json();
+        }
+
+      })
+      .then(result => {
+
+        var message = "";
+        if (result && result.file && result.file[0]) {
+          console.log(result);
+          if (result && result.file && result.file[0] === "This field is required.") {
+            message = `Error ${responseResult.status}: A file is required.`;
+          } else {
+            message = `Error ${responseResult.status}: ${result.file[0]}`;
+          }
+        } else {
+          if (responseResult.status == 204) {
+            // Status 204 is No content. In practicem it is a file with
+            // content, but not the right content.
+            message = `Error ${responseResult.status}: ${responseResult.statusText}`;
+          } else {
+            message = "Bestanden zijn verstuurd.";
+          }
+        }
+        alert(message);
+
+      });
+    // Don't reload the page when you send the form.
+    event.preventDefault();
   }
 
   render() {
@@ -265,7 +286,7 @@ class App extends Component {
           <div className="App-header-bottom"></div>
         </header>
         <main className="App-main">
-          <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
               <br />
               <div className="step-counter">
