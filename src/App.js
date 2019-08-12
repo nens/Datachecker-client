@@ -247,6 +247,7 @@ class App extends Component {
         if (response.status < 300) {
           return response;
         } else {
+          // The result cannot be parsed if it succeeds.
           return response.json();
         }
 
