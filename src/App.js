@@ -212,7 +212,6 @@ class App extends Component {
       form.append("file", this.state.fileAdditionalDataHardenedSurface[0]);
     }
     if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
-      console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
       form.append("file", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
     }
     if (this.state.fileAdditionalDataDrainageAreas[0]) {
@@ -256,7 +255,6 @@ class App extends Component {
 
         var message = "";
         if (result && result.file && result.file[0]) {
-          console.log(result);
           if (result && result.file && result.file[0] === "This field is required.") {
             message = `Error ${responseResult.status}: A file is required.`;
           } else {
