@@ -262,14 +262,9 @@ class App extends Component {
           }
         } else {
           if (responseResult.status == 204) {
-            // Status 204 is No content. In practicem it is a file with
-            // content, but not the right content.
-            // Unfortunately, this error message is also shown when the
-            // results are properly sent. (see datachecker-site repo)
-            // -> datachecker-site/datachecker_site/views.py #40/#41
-            message = `Error ${responseResult.status}: ${responseResult.statusText}`;
+            message = "De bestanden zijn verstuurd.";
           } else {
-            message = "Bestanden zijn verstuurd.";
+            message = `Error ${responseResult.status}: ${responseResult.statusText}`;
           }
         }
         alert(message);
