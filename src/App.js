@@ -11,8 +11,8 @@ class App extends Component {
     super(props, context);
     this.state = {
       // Step 1
-      // Since the riolering is currently the only model type that can be
-      // selected, put it on true as default.
+      // Since riolering is currently the only model type that can be
+      // selected, set it to true as default.
       modelTypeRiolering: true,
       modelTypeOppervlakteWater: false,
       // Step 2
