@@ -255,15 +255,15 @@ class App extends Component {
       .then(result => {
 
         var message = "";
-        if (result && result.file && result.file[0]) {
-          if (result && result.file && result.file[0] === "This field is required.") {
-            message = `Error ${responseResult.status}: A file is required.`;
-          } else {
-            message = `Error ${responseResult.status}: ${result.file[0]}`;
-          }
+        if (responseResult.status == 204) {
+          message = "De bestanden zijn verstuurd.";
         } else {
-          if (responseResult.status == 204) {
-            message = "De bestanden zijn verstuurd.";
+          if (result && result.file && result.file[0]) {
+            if (result && result.file && result.file[0] === "This field is required.") {
+              message = `Error ${responseResult.status}: A file is required.`;
+            } else {
+              message = `Error ${responseResult.status}: ${result.file[0]}`;
+            }
           } else {
             message = `Error ${responseResult.status}: ${responseResult.statusText}`;
           }
