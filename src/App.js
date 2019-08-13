@@ -257,16 +257,16 @@ class App extends Component {
         var message = "";
         if (responseResult.status == 204) {
           message = "De bestanden zijn verstuurd.";
-        } else {
-          if (result && result.file && result.file[0]) {
-            if (result && result.file && result.file[0] === "This field is required.") {
-              message = `Error ${responseResult.status}: A file is required.`;
-            } else {
-              message = `Error ${responseResult.status}: ${result.file[0]}`;
-            }
+        } else if (responseResult.status == 400) {
+          if (result && result.file && result.file[0] === "This field is required.") {
+            message = `Error ${responseResult.status}: A file is required.`;
           } else {
-            message = `Error ${responseResult.status}: ${responseResult.statusText}`;
+            message = `Error ${responseResult.status}: ${result.file[0]}`;
           }
+        } else if (responseResult.status == 403) {
+            message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
+        } else {
+          message = `Error ${responseResult.status}: ${responseResult.statusText}`;
         }
         alert(message);
 
