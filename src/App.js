@@ -11,7 +11,9 @@ class App extends Component {
     super(props, context);
     this.state = {
       // Step 1
-      modelTypeRiolering: false,
+      // Since riolering is currently the only model type that can be
+      // selected, set it to true as default.
+      modelTypeRiolering: true,
       modelTypeOppervlakteWater: false,
       // Step 2
       deliveryFormatGWSW: false,
@@ -184,7 +186,6 @@ class App extends Component {
 
   // Submit
   handleSubmit(event) {
-    console.log(this.state);
 
     var form = new FormData();
 
@@ -211,7 +212,6 @@ class App extends Component {
       form.append("file", this.state.fileAdditionalDataHardenedSurface[0]);
     }
     if (this.state.fileAdditionalDataDrinkingWaterUsage[0]) {
-      console.log(this.state.fileAdditionalDataDrinkingWaterUsage[0]);
       form.append("file", this.state.fileAdditionalDataDrinkingWaterUsage[0]);
     }
     if (this.state.fileAdditionalDataDrainageAreas[0]) {
@@ -233,12 +233,49 @@ class App extends Component {
       credentials: "same-origin",
       method: "POST",
       headers: {
-        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword())
+        // next line needs be commented out on prod, but active on dev
+        // 'Authorization': 'Basic ' + btoa(getUserName() + ":" + getPassword()),
         'X-CSRFToken': csrftoken
       },
       body: form
     };
-    fetch(url, opts);
+    var responseResult = {};
+    fetch(url, opts)
+      .then(response => {
+
+        responseResult = response;
+        if (response.status === 400) {
+          // A 400 response means that something is wrong with a file. The response will contain json data
+          return response.json();
+        } else {
+          // on all other occasions the response will probably not contain json data (there will probably not even be a response)
+          return response;
+        }
+
+      })
+      .then(result => {
+
+        var message = "";
+        if (responseResult.status == 204) {
+          message = "De bestanden zijn verstuurd.";
+        } else if (responseResult.status == 400) {
+          if (result && result.file && result.file[0] === "This field is required.") {
+            message = `Error ${responseResult.status}: Voeg tenminste 1 bestand toe.`;
+          } else {
+            message = `Error ${responseResult.status}: ${result.file[0]}`;
+          }
+        } else if (responseResult.status == 403) {
+            message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
+        } else if (responseResult.status == 413) {
+          message = `Error ${responseResult.status}: Het bestand is te groot.`;
+        }
+         else {
+          message = `Onbekende Error ${responseResult.status}: ${responseResult.statusText}`;
+        }
+        alert(message);
+
+      });
+    // Don't reload the page when you send the form.
     event.preventDefault();
   }
 
@@ -252,7 +289,7 @@ class App extends Component {
           <div className="App-header-bottom"></div>
         </header>
         <main className="App-main">
-          <form enctype="multipart/form-data" onSubmit={this.handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={this.handleSubmit}>
             <div>
               <br />
               <div className="step-counter">
