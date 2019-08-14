@@ -244,11 +244,12 @@ class App extends Component {
       .then(response => {
 
         responseResult = response;
-        if (response.status < 300) {
-          return response;
-        } else {
-          // The result cannot be parsed if it succeeds.
+        if (response.status === 400) {
+          // A 400 response means that something is wrong with a file. The response will contain json data
           return response.json();
+        } else {
+          // on all other occasions the response will probably not contain json data (there will probably not even be a response)
+          return response;
         }
 
       })
@@ -259,14 +260,17 @@ class App extends Component {
           message = "De bestanden zijn verstuurd.";
         } else if (responseResult.status == 400) {
           if (result && result.file && result.file[0] === "This field is required.") {
-            message = `Error ${responseResult.status}: A file is required.`;
+            message = `Error ${responseResult.status}: Voeg tenminste 1 bestand toe.`;
           } else {
             message = `Error ${responseResult.status}: ${result.file[0]}`;
           }
         } else if (responseResult.status == 403) {
             message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
-        } else {
-          message = `Error ${responseResult.status}: ${responseResult.statusText}`;
+        } else if (responseResult.status == 413) {
+          message = `Error ${responseResult.status}: Het bestand is te groot.`;
+        }
+         else {
+          message = `Onbekende Error ${responseResult.status}: ${responseResult.statusText}`;
         }
         alert(message);
 
