@@ -518,7 +518,8 @@ class App extends Component {
               { this.state.isFetching
                 ? (
                     <div>
-                      <MDSpinner size={24} />
+                      <MDSpinner size={20} />
+                      <span style={{paddingLeft: "15px"}}>Het formulier wordt verwerkt.</span>
                     </div>
                 ) : null
               }
