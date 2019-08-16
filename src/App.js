@@ -4,12 +4,14 @@ import './App.css';
 import { getPassword } from './GetPassword.js'
 import { getUserName } from './GetUsername.js'
 import * as Cookies from 'js-cookie';
+import MDSpinner from "react-md-spinner";
 
 
 class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isFetching: false,
       // Step 1
       // Since riolering is currently the only model type that can be
       // selected, set it to true as default.
@@ -240,41 +242,52 @@ class App extends Component {
       body: form
     };
     var responseResult = {};
-    fetch(url, opts)
-      .then(response => {
+    this.setState(
+      {
+        isFetching: true
+      }, () => {
+        fetch(url, opts)
+          .then(response => {
 
-        responseResult = response;
-        if (response.status === 400) {
-          // A 400 response means that something is wrong with a file. The response will contain json data
-          return response.json();
-        } else {
-          // on all other occasions the response will probably not contain json data (there will probably not even be a response)
-          return response;
-        }
+            responseResult = response;
+            if (response.status === 400) {
+              // A 400 response means that something is wrong with a file. The response will contain json data
+              return response.json();
+            } else {
+              // on all other occasions the response will probably not contain json data (there will probably not even be a response)
+              return response;
+            }
 
-      })
-      .then(result => {
+          })
+          .then(result => {
 
-        var message = "";
-        if (responseResult.status == 204) {
-          message = "De bestanden zijn verstuurd.";
-        } else if (responseResult.status == 400) {
-          if (result && result.file && result.file[0] === "This field is required.") {
-            message = `Error ${responseResult.status}: Voeg tenminste 1 bestand toe.`;
-          } else {
-            message = `Error ${responseResult.status}: ${result.file[0]}`;
-          }
-        } else if (responseResult.status == 403) {
-            message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
-        } else if (responseResult.status == 413) {
-          message = `Error ${responseResult.status}: Het bestand is te groot. \nHet maximum is 500MB per bestand.`;
-        }
-         else {
-          message = `Onbekende Error ${responseResult.status}: ${responseResult.statusText}`;
-        }
-        alert(message);
-
-      });
+            var message = "";
+            if (responseResult.status == 204) {
+              message = "De bestanden zijn verstuurd.";
+            } else if (responseResult.status == 400) {
+              if (result && result.file && result.file[0] === "This field is required.") {
+                message = `Error ${responseResult.status}: Voeg tenminste 1 bestand toe.`;
+              } else {
+                message = `Error ${responseResult.status}: ${result.file[0]}`;
+              }
+            } else if (responseResult.status == 403) {
+                message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
+            } else if (responseResult.status == 413) {
+              message = `Error ${responseResult.status}: Het bestand is te groot. \nHet maximum is 500MB per bestand.`;
+            }
+             else {
+              message = `Onbekende Error ${responseResult.status}: ${responseResult.statusText}`;
+            }
+            this.setState(
+              {
+                isFetching: false
+              }, () => {
+                alert(message)
+              }
+            )
+          })
+      }
+    );
     // Don't reload the page when you send the form.
     event.preventDefault();
   }
@@ -500,9 +513,17 @@ class App extends Component {
               <br />
               <br />
               <input type="submit" value="VERZENDEN" />
+              <br />
+              <br />
+              { this.state.isFetching
+                ? (
+                    <div>
+                      <MDSpinner size={20} />
+                      <span style={{paddingLeft: "15px"}}>Het formulier wordt verwerkt.</span>
+                    </div>
+                ) : null
+              }
             </div>
-            <br />
-            <br />
           </form>
         </main>
         <footer className="App-footer">
