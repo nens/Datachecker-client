@@ -267,7 +267,7 @@ class App extends Component {
         } else if (responseResult.status == 403) {
             message = `Error ${responseResult.status}: Je bent niet ingelogd.`;
         } else if (responseResult.status == 413) {
-          message = `Error ${responseResult.status}: Het bestand is te groot.`;
+          message = `Error ${responseResult.status}: Het bestand is te groot. \nHet maximum is 500MB per bestand.`;
         }
          else {
           message = `Onbekende Error ${responseResult.status}: ${responseResult.statusText}`;
