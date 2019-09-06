@@ -538,9 +538,7 @@ class App extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i
-                className={`material-icons`}
-              >
+              <i className={`material-icons`}>
                 headset_mic
               </i>
               Support
