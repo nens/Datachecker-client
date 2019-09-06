@@ -526,13 +526,7 @@ class App extends Component {
             </div>
           </form>
         </main>
-        <footer
-          className="App-footer"
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly"
-          }}
-        >
+        <footer className="App-footer">
           <div>
           </div>
           <div>
@@ -543,15 +537,9 @@ class App extends Component {
               href="https://nelen-schuurmans.topdesk.net/tas/public/ssp"
               target="_blank"
               rel="noopener noreferrer"
-              style={{textDecoration: "none"}}
             >
               <i
                 className={`material-icons`}
-                style={{
-                  position: "relative",
-                  top: "5px",
-                  fontSize: "20px"
-                }}
               >
                 headset_mic
               </i>
