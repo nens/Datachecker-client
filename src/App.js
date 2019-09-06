@@ -526,8 +526,38 @@ class App extends Component {
             </div>
           </form>
         </main>
-        <footer className="App-footer">
+        <footer
+          className="App-footer"
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly"
+          }}
+        >
+          <div>
+          </div>
+          <div>
             Welkom op de Datachecker!
+          </div>
+          <div>
+            <a
+              href="https://nelen-schuurmans.topdesk.net/tas/public/ssp"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{textDecoration: "none"}}
+            >
+              <i
+                className={`material-icons`}
+                style={{
+                  position: "relative",
+                  top: "5px",
+                  fontSize: "20px"
+                }}
+              >
+                headset_mic
+              </i>
+              Support
+            </a>
+          </div>
         </footer>
       </div>
     );
