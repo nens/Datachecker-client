@@ -527,12 +527,12 @@ class App extends Component {
           </form>
         </main>
         <footer className="App-footer">
-          <div>
+          <div className="App-footer-item">
           </div>
-          <div>
+          <div className="App-footer-item">
             Welkom op de Datachecker!
           </div>
-          <div>
+          <div className="App-footer-item">
             <a
               href="https://nelen-schuurmans.topdesk.net/tas/public/ssp"
               target="_blank"

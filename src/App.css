@@ -66,13 +66,19 @@ input[type="checkbox"]:disabled {
   height: 10vh;
   flex: 1 0 100%;
   align-items: center;
-  justify-content: space-evenly;
   background-color: #c3c3c3;
+}
+.App-footer-item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  text-align: center;
 }
 .App-footer a {
   text-decoration: none;
   color: #C0392B;
 }
+
 .material-icons {
   position: relative;
   top: 5px;
