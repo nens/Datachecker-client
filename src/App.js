@@ -534,7 +534,7 @@ class App extends Component {
           </div>
           <div className="App-footer-item">
             <a
-              href="https://nelen-schuurmans.topdesk.net/tas/public/ssp"
+              href="mailto:servicedesk@datachecker.net"
               target="_blank"
               rel="noopener noreferrer"
             >
