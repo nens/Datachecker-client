@@ -109,3 +109,5 @@ Deploy the build to the server:
 * Go to the deploy folder
 
 * Run `ansible-playbook -i staging deploy.yml` to deploy the build to staging.
+or
+* Run `ansible-playbook -i production deploy.yml` to deploy the build to production.
